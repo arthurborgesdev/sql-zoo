@@ -78,3 +78,51 @@ SELECT capital, name
 SELECT name, REPLACE(capital, name, '')
   FROM world
  WHERE capital LIKE concat(name, '_%')
+
+
+/* 2 - SELECT FROM WORLD */
+
+-- 2.1 
+SELECT name, continent, population FROM world
+
+-- 2.2
+SELECT name
+  FROM world
+ WHERE population > 200000000
+
+-- 2.3
+SELECT name, gdp/population AS per_capita_gdp
+  FROM world
+ WHERE population > 200000000
+
+-- 2.4
+SELECT name, population/1000000 AS population_millions
+  FROM world
+ WHERE continent LIKE 'South America'
+
+-- 2.5
+SELECT name, population
+  FROM world
+ WHERE name IN('France', 'Germany', 'Italy')
+
+-- 2.6
+SELECT name
+  FROM world
+ WHERE name LIKE '%United%'
+
+-- 2.7
+SELECT name, population, area
+  FROM world
+ WHERE area > 3000000 OR population > 250000000
+
+-- 2.8
+SELECT name, population, area
+  FROM world
+ WHERE area > 3000000 XOR population > 250000000
+
+-- 2.9
+SELECT name, ROUND(population/1000000, 2) AS population_millions, ROUND(gdp/1000000000, 2) AS gdp_billions
+  FROM world
+ WHERE continent = 'South America'
+
+-- 2.10
