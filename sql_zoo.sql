@@ -126,3 +126,6 @@ SELECT name, ROUND(population/1000000, 2) AS population_millions, ROUND(gdp/1000
  WHERE continent = 'South America'
 
 -- 2.10
+SELECT name, ROUND(gdp/population, -3) AS gdp_per_capita
+  FROM world
+ WHERE gdp >= 1000000000000
