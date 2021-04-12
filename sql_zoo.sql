@@ -63,3 +63,18 @@ SELECT name
 SELECT name 
   FROM world
  WHERE capital = concat(name, ' City')
+
+-- 1.13
+SELECT capital, name
+  FROM world
+ WHERE capital LIKE concat('%', name, '%')
+
+-- 1.14
+SELECT capital, name
+  FROM world
+ WHERE capital LIKE concat(name, '_%')
+
+-- 1.15
+SELECT name, REPLACE(capital, name, '')
+  FROM world
+ WHERE capital LIKE concat(name, '_%')
