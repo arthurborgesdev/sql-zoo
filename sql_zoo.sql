@@ -490,3 +490,6 @@ WHERE  movie.id IN (SELECT movie.id
 -- 7.13
 -- 7.14
 -- 7.15 
+
+
+/* 8 - USING NULL */
