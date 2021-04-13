@@ -409,3 +409,84 @@ SELECT matchid, mdate, COUNT(teamid)
 
 -- 6.13 (NOT COVERED BEFORE)
 
+/* 7 - MORE JOIN */
+-- 7.1
+SELECT id, title
+ FROM movie
+ WHERE yr=1962
+
+-- 7.2
+SELECT yr
+  FROM movie
+ WHERE title = 'Citizen Kane'
+
+-- 7.3
+SELECT id, title, yr
+  FROM movie
+ WHERE title LIKE '%Star Trek%'
+ ORDER BY yr
+
+-- 7.4
+SELECT id
+  FROM actor
+ WHERE name = 'Glenn Close'
+
+-- 7.5
+SELECT id
+  FROM movie
+ WHERE title = 'Casablanca'
+
+-- 7.6
+SELECT name
+  FROM movie JOIN casting ON (movie.id = casting.movieid)
+             JOIN actor ON (casting.actorid = actor.id)
+  WHERE movieid = 11768 
+
+-- 7.7
+SELECT name
+  FROM movie JOIN casting ON (movie.id = casting.movieid)
+             JOIN actor ON (casting.actorid = actor.id)
+  WHERE title = 'Alien' 
+
+-- 7.8
+SELECT title
+  FROM movie JOIN casting ON (movie.id = casting.movieid)
+             JOIN actor ON (casting.actorid = actor.id)
+  WHERE name = 'Harrison Ford' 
+
+-- 7.9
+SELECT title
+  FROM movie JOIN casting ON (movie.id = casting.movieid)
+             JOIN actor ON (casting.actorid = actor.id)
+  WHERE name = 'Harrison Ford' AND ord != 1
+
+-- 7.10
+SELECT title, name
+  FROM movie JOIN casting ON (movie.id = casting.movieid)
+             JOIN actor ON (casting.actorid = actor.id)
+  WHERE yr = 1962 AND ord = 1
+
+-- 7.11
+SELECT yr, COUNT(title) FROM
+  movie JOIN casting ON movie.id=movieid
+        JOIN actor   ON actorid=actor.id
+  WHERE name='Rock Hudson'
+  GROUP BY yr
+  HAVING COUNT(title) > 2
+
+-- 7.12 (BASED FROM YOUTUBE)
+SELECT movie.title, actor.name
+FROM movie
+JOIN casting ON casting.movieid = movie.id
+JOIN actor ON casting.actorid = actor.id
+WHERE  movie.id IN (SELECT movie.id
+                     FROM movie
+                     JOIN casting ON casting.movieid = movie.id
+                     JOIN actor ON casting.actorid = actor.id
+                     WHERE actor.name = 'Julie Andrews'
+) AND casting.ord = 1
+
+-- (HARD ONES, SAVE FOR LATER)
+-- 7.13
+-- 7.14
+-- 7.15 
