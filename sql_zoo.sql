@@ -81,7 +81,6 @@ SELECT name, REPLACE(capital, name, '')
 
 
 /* 2 - SELECT FROM WORLD */
-
 -- 2.1 
 SELECT name, continent, population FROM world
 
@@ -145,3 +144,53 @@ SELECT name
    FROM world
 WHERE name LIKE '%a%' AND name LIKE '%e%' AND name LIKE '%i%' AND name LIKE '%o%' AND name LIKE '%u%'
   AND name NOT LIKE '% %'
+
+
+/* 3 - SELECT FROM NOBEL */
+-- 3.1 
+SELECT yr, subject, winner
+  FROM nobel
+ WHERE yr = 1950
+
+-- 3.2
+SELECT winner
+  FROM nobel
+ WHERE yr = 1962
+   AND subject = 'Literature'
+
+-- 3.3
+SELECT yr, subject
+  FROM nobel
+ WHERE winner = 'Albert Einstein'
+
+-- 3.4
+SELECT winner
+  FROM nobel
+ WHERE subject = 'Peace' AND yr >= 2000
+
+-- 3.5
+SELECT *
+  FROM nobel
+ WHERE subject = 'Literature' AND yr >= 1980 AND yr <= 1989
+
+-- 3.6
+SELECT * FROM nobel
+ WHERE winner IN ('Theodore Roosevelt',
+                  'Woodrow Wilson',
+                  'Jimmy Carter',
+                  'Barack Obama')
+
+-- 3.7
+SELECT winner
+  FROM nobel
+ WHERE winner LIKE 'John%'
+
+-- 3.8
+SELECT yr, subject, winner
+  FROM nobel
+ WHERE (subject LIKE 'Physics' AND yr = 1980) OR (subject LIKE 'Chemistry' AND yr = 1984) 
+
+-- 3.9
+SELECT *
+  FROM nobel
+ WHERE yr = 1980 AND subject NOT IN('Chemistry', 'Medicine')
