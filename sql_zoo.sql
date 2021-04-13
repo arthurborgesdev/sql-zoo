@@ -221,3 +221,18 @@ SELECT winner, subject
  WHERE yr=1984
  ORDER BY subject IN ('Physics','Chemistry'), subject, winner
 
+
+/* 4 - SELECT IN SELECT */
+-- 4.1
+SELECT name FROM world
+  WHERE population >
+     (SELECT population FROM world
+      WHERE name='Russia')
+
+-- 4.2
+SELECT name 
+  FROM world
+ WHERE gdp/population > (
+    SELECT
+      gdp/population FROM world WHERE name = 'United Kingdom'
+ ) AND continent = 'Europe'
