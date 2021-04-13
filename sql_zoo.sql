@@ -129,3 +129,19 @@ SELECT name, ROUND(population/1000000, 2) AS population_millions, ROUND(gdp/1000
 SELECT name, ROUND(gdp/population, -3) AS gdp_per_capita
   FROM world
  WHERE gdp >= 1000000000000
+
+-- 2.11
+SELECT name, capital
+  FROM world
+ WHERE LENGTH(name) = LENGTH(capital)
+
+-- 2.12
+SELECT name, capital
+  FROM world
+ WHERE LEFT(name, 1) = LEFT(capital, 1) AND name <> capital
+
+-- 2.13
+SELECT name
+   FROM world
+WHERE name LIKE '%a%' AND name LIKE '%e%' AND name LIKE '%i%' AND name LIKE '%o%' AND name LIKE '%u%'
+  AND name NOT LIKE '% %'
