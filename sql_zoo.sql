@@ -236,3 +236,51 @@ SELECT name
     SELECT
       gdp/population FROM world WHERE name = 'United Kingdom'
  ) AND continent = 'Europe'
+
+-- 4.3
+SELECT name, continent
+  FROM world
+ WHERE continent IN(
+  SELECT continent
+    FROM world
+   WHERE name = 'Argentina' OR name = 'Australia'
+  ) ORDER BY name
+
+-- 4.4
+SELECT name, population
+  FROM world
+ WHERE population > (SELECT population FROM world WHERE name = 'Canada') AND 
+       population < (SELECT population FROM world WHERE name = 'Poland')
+
+-- 4.5
+SELECT name, CONCAT(ROUND(100*population/(SELECT population FROM world WHERE name = 'Germany')), '%')
+ FROM world
+  WHERE continent = 'Europe'
+
+-- 4.6
+SELECT name
+  FROM world
+ WHERE gdp > ALL(SELECT gdp FROM world WHERE gdp > 0 AND continent = 'Europe') 
+
+-- 4.7
+SELECT continent, name, area FROM world x
+  WHERE area >= ALL
+    (SELECT area FROM world y
+        WHERE y.continent=x.continent
+          AND area>0)
+
+-- 4.8
+SELECT continent, name FROM world x
+  WHERE name = (SELECT name FROM world y
+                 WHERE x.continent = y.continent
+                 LIMIT 1)
+
+-- 4.9 (NOT COVERED BEFORE)
+-- 4.10 (NOT COVERED BEFORE)
+
+/* 5 - SUM AND COUNT */
+-- 5.1
+SELECT SUM(population)
+  FROM world
+
+-- 5.2
