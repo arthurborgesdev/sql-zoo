@@ -541,3 +541,47 @@ SELECT teacher.name,
        ELSE 'Sci'
   END
  FROM teacher
+
+ 
+/* 9 - SELF JOIN */
+-- 9.1
+SELECT COUNT(id)
+  FROM stops
+
+-- 9.2
+SELECT id
+  FROM stops
+ WHERE name = 'Craiglockhart'
+
+-- 9.3
+SELECT id, name
+  FROM stops JOIN route ON (stops.id = route.stop)
+ WHERE num = '4' AND company = 'LRT'
+
+-- 9.4
+SELECT company, num, COUNT(*)
+  FROM route 
+ WHERE stop=149 OR stop=53
+ GROUP BY company, num
+ HAVING COUNT(*) = 2
+
+-- 9.5
+SELECT a.company, a.num, a.stop, b.stop
+  FROM route a 
+ JOIN route b ON (a.num = b.num)
+ WHERE a.stop = 53
+ AND b.stop = 149
+
+-- 9.6
+SELECT a.company, a.num, stopa.name, stopb.name
+FROM route a JOIN route b ON
+  (a.company=b.company AND a.num=b.num)
+  JOIN stops stopa ON (a.stop=stopa.id)
+  JOIN stops stopb ON (b.stop=stopb.id)
+WHERE stopa.name='Craiglockhart'
+AND stopb.name = 'London Road'
+
+-- 9.7
+-- 9.8
+-- 9.9
+-- 9.10 (SELF JOINS - DO LATER)
