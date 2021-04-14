@@ -493,3 +493,51 @@ WHERE  movie.id IN (SELECT movie.id
 
 
 /* 8 - USING NULL */
+-- 8.1
+SELECT name
+  FROM teacher
+ WHERE dept IS NULL
+
+-- 8.2
+SELECT teacher.name, dept.name
+ FROM teacher INNER JOIN dept
+           ON (teacher.dept=dept.id)
+
+-- 8.3
+SELECT teacher.name, dept.name
+  FROM teacher LEFT JOIN dept
+    ON (teacher.dept = dept.id)
+
+-- 8.4
+SELECT teacher.name, dept.name
+  FROM teacher RIGHT JOIN dept
+    ON (teacher.dept = dept.id)
+
+-- 8.5
+SELECT name, COALESCE(mobile, '07986 444 2266')
+  FROM teacher
+
+-- 8.6
+SELECT teacher.name, COALESCE(dept.name, 'None')
+  FROM teacher LEFT JOIN dept ON (teacher.dept = dept.id)
+
+-- 8.7
+SELECT COUNT(teacher.name), COUNT(teacher.mobile)
+  FROM teacher 
+
+-- 8.8
+SELECT dept.name, COUNT(teacher.name)
+  FROM teacher RIGHT JOIN dept ON (teacher.dept = dept.id)
+ GROUP BY dept.name
+
+-- 8.9
+SELECT name, CASE WHEN dept IS NULL THEN 'Art' ELSE 'Sci' END
+  FROM teacher
+
+-- 8.10
+SELECT teacher.name,
+  CASE WHEN dept IS NULL THEN 'None'
+       WHEN dept = 3 THEN 'Art'
+       ELSE 'Sci'
+  END
+ FROM teacher
